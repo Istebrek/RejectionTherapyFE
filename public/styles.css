@@ -1,0 +1,376 @@
+/*General*/
+body, html {
+    overflow-x: hidden;
+}
+body {
+    background-color: #121212;
+    color: #0ff;
+    font-family: 'Bold Title', 'Arial', sans-serif;
+    font-weight: lighter;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+h1 {
+    color: white;
+    font-weight: bold;
+    
+}
+
+button {
+    background-color: transparent;
+    outline: transparent;
+    border: transparent;
+    box-shadow: transparent;
+    color: #0ff;
+}
+/*TAB 3*/
+
+.edit-button-class,
+.delete-button-class {
+    border: none;
+    background: #444;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.edit-button-class:hover {
+    transform: translateY(-5px);
+    align-items: end;
+    justify-content: end;
+}
+
+.delete-button-class:hover {
+    transform: translateY(-5px);
+}
+
+#dares-list {
+    list-style: none;
+    padding: 0;
+}
+
+#dares-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #222;
+    padding: 20px;
+    margin: 25px 0;
+    border-radius: 10px;
+    color: #0ff;
+    font-size: 1.1rem;
+}
+
+.dare-text {
+    flex-grow: 1;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn, .delete-btn {
+    border: none;
+    background: #444;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.edit-btn:hover {
+    background: #007bff;
+}
+
+.delete-btn:hover {
+    background: #ff4d4d;
+}
+
+
+
+/*TAB 2*/
+.login-box, .main-ui {
+    background: black;
+    padding: 30px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    align-items: center;
+    text-align: center;
+}
+.main-ui {
+    display: none;
+}
+
+.main-ui {
+    background: black;
+    padding: 30px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    align-items: center;
+    text-align: center;
+    display: none;
+}
+
+#welcome {
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+#completed-ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+#completed-ul li {
+    background-color: #0ff;
+    color: black;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 5px;
+    font-size: 18px;
+    box-shadow: 3px 3px 5px 1px white;
+    transition: 0.3s ease;
+}
+
+#completed-ul li:hover {
+    transform: translateY(-3px);
+    font-weight: bold;
+}
+
+
+#loginBox {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+#login-button {
+    width: 210PX;
+    height: 35px;
+    border: #0ff 2px solid;
+}
+
+#username {
+    width: 210PX;
+    height: 35px;
+}
+
+/*TAB 1 random section*/
+#random-dare-div {
+    background-color: white;
+    padding: 3px 18px;
+    margin: 10px;
+    text-align: center;
+    color: white;
+    height: 350px;
+    width: 280px;
+    border: #121212 5px solid;
+    outline: white 1px solid;
+    background: linear-gradient(to bottom, #0ff 0%, #121212 90%);
+    color: black;
+    font-size: 18px;
+    border-radius: 8px;
+    box-shadow: 3px 3px 5px 1px white;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#dare-id::-webkit-scrollbar {
+    width: 12px;
+}
+#dare-id::-webkit-scrollbar-track {
+    background: black;
+    border-radius: 10px;
+}
+
+#dare-id::-webkit-scrollbar-thumb {
+    background: #b4b4b4; 
+    border-radius: 10px;
+}
+
+#dare-id::-webkit-scrollbar-thumb:hover {
+    background: white;
+}
+
+.dare-span {
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 15px; 
+}
+
+.full-dare-span {
+    margin-top: 20px; 
+    overflow-y: auto;
+}
+
+.dif-span {
+    font-size: 12px;
+    color: white;
+    text-align: center;
+    margin-top: auto; 
+    margin-bottom: 3px;
+}
+
+.dif-span::before {
+    content: "";
+  display: block;
+    width: 100%;
+  border-top: 1px solid white;
+  position: relative;
+  top: -5px;
+}
+#tab-1-div {
+    display: flex;
+    flex-direction: row;
+}
+#button-div{
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    justify-content: center;
+}
+.random-button {
+    margin: 20px;
+    color: #0ff;
+    width: 190px;
+    height: 50px;
+    background-color: transparent;
+    border: #0ff 1.5px solid;
+    border-radius: 6px;
+    border-right: 0px;
+    outline: transparent;
+    box-shadow: 3px 3px 5px 1px white;
+    font-size: 18px;
+}
+.random-button:hover {
+    font-weight: bold;
+    transform: translateY(-9px);
+    font-size: 20px;
+    transition: 0.3s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*TAB STYLING*/
+.container {
+    display: flex;
+    width: 100%;
+}
+
+
+.sidebar {
+    position: fixed;
+    width: 190px;
+    height: 100vh;
+    background-color: #1a1a1a;
+    display: flex;
+    margin-left: 0%;
+    flex-direction: column;
+    padding: 20px;
+    margin: 0%;
+    padding-right: 0%;
+    left: 0;
+    right: 0;
+    border-right: 2px white solid !important;
+    z-index: 100;
+    margin-right: 2px;
+    
+}
+
+.tab-button {
+    white-space: nowrap;
+    word-spacing: 4px;
+    letter-spacing: 1px;
+    background-color: #222;
+    color: #0ff;
+    border: none;
+    padding: 12px;
+    margin: 7px 0;
+    cursor: pointer;
+    text-align: left;
+    border-radius: 8px;
+    transition: 0.3s ease;
+    font-size: 15px;
+    border-top-right-radius: 0%;
+    border-bottom-right-radius: 0%;
+    outline: transparent;
+    z-index: 10;
+    background: linear-gradient(to right, #222, rgba(34, 34, 34, 0));
+    margin-right: -2.3px;
+}
+.tab-button i {
+    display: inline-block;
+    margin-right: 5px;
+}
+.tab-button:hover {
+    background-color: #333;
+    margin-right: 0px;
+}
+
+.tab-button.active {
+    border: 2px solid white;
+    background-color: #121212;
+    border-right: 4px solid #121212;
+    border-top-right-radius: 0%;
+    border-bottom-right-radius: 0%;
+    z-index: 200;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 35px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    margin-left: 150px;
+    font-family: 'Regular', Arial, Helvetica, sans-serif;
+}
+@font-face {
+    font-family: 'Bold Title';
+    src: url('TypoGraphic.otf') format('truetype');
+}
+@font-face {
+    font-family: 'Regular';
+    src: url('Comfortaa-Regular.ttf') format('truetype');
+}
+
+
+
+/*
+Neon Purple: #c600ff
+Neon Green: #00ff00
+Neon Yellow: #ffff00
+*/
