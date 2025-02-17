@@ -2,6 +2,9 @@ const axios = require("axios");
 const express = require("express");
 const fetch = require("node-fetch");
 const cors = require ("cors");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -10,7 +13,7 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(cors());
 
-const URL = "https://rejectiontherapy-gtfecsatecebfna4.westeurope-01.azurewebsites.net";
+const URL = process.env.DOTNET_API_URL;
 
 
 

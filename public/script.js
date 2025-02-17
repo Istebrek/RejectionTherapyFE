@@ -191,7 +191,7 @@ async function fetchDares() {
         const response = await fetch("http://localhost:3000/express/dares");
         const dares = await response.json();
 
-        daresList.innerHTML = ""; 
+        daresList.innerHTML = "" ; 
         dares.forEach(dare => {
             const dareItem = document.createElement("li");
             dareItem.textContent = `${dare.name}: ${dare.dare} | Difficulty: ${dare.difficulty} | Category: ${dare.category}`;
