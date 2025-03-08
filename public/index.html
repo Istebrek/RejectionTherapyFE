@@ -49,26 +49,30 @@
             </div>
             
             <div id="search-dare" class="tab-content">
-                <h1>All Dares</h1>
+                <div class="add-div">
+                    <h1>All Dares</h1> 
+                    <button id="open-modal-button" class="add-new-button">
+                        <i class="fa-solid fa-plus"></i> Add New
+                    </button>
+
+                </div>
                 <ul id="dares-list"></ul>
-                <h1>Add a Dare</h1>
-                <form id="dare-form">
-                    <input type="text" id="name" placeholder="Your Name" required>
-                    <input type="text" id="dare" placeholder="Dare" required>
-                    <input type="text" id="difficulty" placeholder="Difficulty" required>
-                    <input type="text" id="category" placeholder="Category" required>
-                    <button type="submit">Add Dare</button>
-                </form>
-                <p id="search-result"></p>
-                <h1>Update Dare</h1>
-                <form id="update-form">
-                    <input type="text" id="update-id" placeholder="Enter Dare ID" required>
-                    <input type="text" id="update-name" placeholder="New Name">
-                    <input type="text" id="update-dare" placeholder="New Dare">
-                    <input type="text" id="update-difficulty" placeholder="New Difficulty">
-                    <input type="text" id="update-category" placeholder="New Category">
-                    <button type="submit">Update Dare</button>
-                </form>
+                <div id="add-dare-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <h2>Add a New Dare</h2>
+                        <form id="modal-dare-form">
+                            <input type="text" id="modal-name" placeholder="Dare Name" required>
+                            <input type="text" id="modal-dare" placeholder="Dare Description" required>
+                            <input type="text" id="modal-difficulty" placeholder="Difficulty" required>
+                            <input type="text" id="modal-category" placeholder="Category" required>
+                            <div class="modal-buttons">
+                                <button type="submit" id="save-dare-button">Save</button>
+                                <button type="button" id="cancel-modal-button">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
     
             <div id="update-dare" class="tab-content">

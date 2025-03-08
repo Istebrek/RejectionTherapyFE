@@ -187,18 +187,29 @@ async function fetchUserInfo () {
 async function fetchDares() {
     try {
         const daresList = document.getElementById("dares-list");
-        
+
         const response = await fetch("http://localhost:3000/express/dares");
         const dares = await response.json();
 
-        daresList.innerHTML = "" ; 
+        daresList.innerHTML = ""; 
         dares.forEach(dare => {
             const dareItem = document.createElement("li");
-            dareItem.textContent = `${dare.name}: ${dare.dare} | Difficulty: ${dare.difficulty} | Category: ${dare.category}`;
-        
+
+            
+            dareItem.innerHTML = `
+                <span class="dare-name">${dare.name}</span>
+                <span class="dare-description">${dare.dare}</span>
+                <div class="structure-div">
+                <span class="dare-difficulty">Difficulty: ${dare.difficulty} </span> 
+                <span class="dare-category">Category: ${dare.category}</span>
+                </div>
+            `;
+
+            
             const buttonContainer = document.createElement("div");
             buttonContainer.classList.add("buttons");
-        
+
+            
             const deleteButton = document.createElement("button");
             deleteButton.classList.add("delete-button-class");
             deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
@@ -206,119 +217,128 @@ async function fetchDares() {
                 await deleteDare(dare.id);
                 fetchDares();
             });
-        
+
+            
             const editButton = document.createElement("button");
             editButton.classList.add("edit-button-class");
             editButton.innerHTML = '<i class="fa-solid fa-pen"></i>';
-            editButton.addEventListener("click", async () => {
-                await updateDare(); // Make sure you define updateDare function
+            editButton.addEventListener("click", () => {
+                enableEditing(dareItem, dare);
             });
-        
+
             buttonContainer.appendChild(editButton);
             buttonContainer.appendChild(deleteButton);
-        
             dareItem.appendChild(buttonContainer);
             daresList.appendChild(dareItem);
         });
-        
 
     } catch (error) {
         console.error("Error loading dares:", error);
     }
 }
+
 fetchDares();
+function enableEditing(dareItem, dare) {
+    dareItem.innerHTML = `
+        <input type="text" class="edit-name" value="${dare.name}">
+        <input type="text" class="edit-description" value="${dare.dare}">
+        <input type="text" class="edit-difficulty" value="${dare.difficulty}">
+        <input type="text" class="edit-category" value="${dare.category}">
+        <button class="save-button"><i class="fa-solid fa-save"></i> Save</button>
+    `;
 
-//add dare
-const form = document.getElementById("dare-form");
-form.addEventListener("submit", async function (e) {
-    e.preventDefault();
+    
+    const saveButton = dareItem.querySelector(".save-button");
+    saveButton.addEventListener("click", async () => {
+        await updateDare(dare.id, dareItem);
+    });
+}
 
-    const dareData = {
-        name: document.getElementById("name").value,
-        dare: document.getElementById("dare").value,
-        difficulty: document.getElementById("difficulty").value,
-        category: document.getElementById("category").value
-    };
-
+async function updateDare(dareId, dareItem) {
     try {
-        const response = await fetch("http://localhost:3000/express/dare", {
-            method: "POST",
+        const updatedDare = {
+            name: dareItem.querySelector(".edit-name").value,
+            dare: dareItem.querySelector(".edit-description").value,
+            difficulty: dareItem.querySelector(".edit-difficulty").value,
+            category: dareItem.querySelector(".edit-category").value
+        };
+
+        const response = await fetch(`http://localhost:3000/express/dare/${dareId}`, {
+            method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(dareData)
+            body: JSON.stringify(updatedDare)
         });
 
         if (response.ok) {
-            console.log("Dare added successfully");
-            form.reset();
-            fetchDares(); // Refresh the list
+            console.log("Dare updated successfully");
+            fetchDares(); // Refresh list after update
         } else {
-            console.error("Failed to add dare");
+            console.error("Failed to update dare");
         }
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Error updating dare:", error);
     }
-});
+}
 
-//Get by id
-const idForm = document.getElementById("search-form");
-idForm.addEventListener("submit", async function (e) {
-    e.preventDefault();
+//add dare
+    const modal = document.getElementById("add-dare-modal");
+    const openModalButton = document.getElementById("open-modal-button");
+    const closeModalButton = document.querySelector(".close-modal");
+    const cancelModalButton = document.getElementById("cancel-modal-button");
+    const saveDareButton = document.getElementById("save-dare-button");
+    const modalForm = document.getElementById("modal-dare-form");
 
-    const dareId = document.getElementById("search-id").value;
+    // Open modal
+    openModalButton.addEventListener("click", () => {
+        modal.style.display = "block";
+    });
 
-    try {
-        console.log("Fetching dare with ID:", dareId);
-        const response = await fetch(`http://localhost:3000/express/dare/${dareId}`);
-        
-        const resultP = document.getElementById("search-result");
-        if (response.ok) {
-            const dare = await response.json();
-            resultP.textContent = 
-                `${dare.name}: ${dare.dare}, ${dare.difficulty}, ${dare.category}`;
-            idForm.reset();
-            
-        } else {
-            resultP.textContent = "Dare not found";
+    // Close modal
+    closeModalButton.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    cancelModalButton.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    // Close modal when clicking outside of it
+    window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.style.display = "none";
         }
-    } catch (error) {
-        console.error("Error fetching dare:", error);
-    }
-});
+    });
 
-
-//update
-const updateForm = document.getElementById("update-form");
-async function updateDare () {
-    updateForm.addEventListener("submit", async function (e) {
+    // Save Dare
+    modalForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-    
-        const dareId = document.getElementById("update-id").value;
-        const updatedDareData = {
-            name: document.getElementById("update-name").value,
-            dare: document.getElementById("update-dare").value,
-            difficulty: document.getElementById("update-difficulty").value,
-            category: document.getElementById("update-category").value
+
+        const dareData = {
+            name: document.getElementById("modal-name").value,
+            dare: document.getElementById("modal-dare").value,
+            difficulty: document.getElementById("modal-difficulty").value,
+            category: document.getElementById("modal-category").value
         };
-    
+
         try {
-            const response = await fetch("http://localhost:3000/express/dare/" + dareId, {
-                method: "PUT",
+            const response = await fetch("http://localhost:3000/express/dare", {
+                method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(updatedDareData)
+                body: JSON.stringify(dareData)
             });
-    
+
             if (response.ok) {
-                console.log("Dare updated successfully");
-                fetchDares(); // Refresh the list
+                console.log("Dare added successfully");
+                modalForm.reset();
+                modal.style.display = "none";
+                fetchDares(); // Refresh the list of dares
             } else {
-                console.error("Failed to update dare");
+                console.error("Failed to add dare");
             }
         } catch (error) {
             console.error("Error:", error);
         }
     });
-}
-
 
 //delete
 async function deleteDare(dareId) {
@@ -338,3 +358,4 @@ async function deleteDare(dareId) {
         console.error("Error:", error);
     }
 }
+
